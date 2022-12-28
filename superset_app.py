@@ -391,7 +391,11 @@ elif chosen_menu == "6. Самостоятельная работа":
         question_1_wrong_3 = st.checkbox("1.6 л")
         question_1_wrong_4 = st.checkbox("1.3 л")
 
-        st.markdown('**Вопрос 2:** ')
+        st.markdown('**Вопрос 2:** Какая будет средняя цена всех автомобилей с типом коробки - "Механика", типом привода - "Полный" и типом кузова - "Седан"?')
+        question_2_wrong_1 = st.checkbox("1.5М")
+        question_2_wrong_2 = st.checkbox("1М")
+        question_2_right_3 = st.checkbox("1.85М")
+        question_2_wrong_4 = st.checkbox("580k")
 
         st.markdown('**Вопрос 3:** Давайте попробуем посмотреть, какова средняя цена всех машин марки `Mercedes` по всей России?')
         question_3_wrong_1 = st.checkbox("200K")
@@ -399,13 +403,34 @@ elif chosen_menu == "6. Самостоятельная работа":
         question_3_wrong_3 = st.checkbox("16M")
         question_3_wrong_4 = st.checkbox("500k") 
 
+        st.markdown('**Вопрос 4:** Попробуем расчитать средний транспортный налог за полный календарный год для всех автомобилей марки `Audi` в регионе `Московская область`(`RU-MOW`)?  ')
+        st.write("""
+        Налоговая ставка для автомобиля в Московской области фиксированна, в зависимости от количества лошадиных сил [источник](https://yuridicheskaya-konsultaciya.ru/nalogi/transportniy-nalog-stavki-v-moskvskoy-obl.html):
+        \n до 100 л.с - 10р
+        \n от 100 л.с до 150 л.с - 34р 
+        \n от 150 л.с до 200 л.с - 49р
+        \n от 200 л.с до 250 л.с - 75р
+        \n свыше 250 л.с - 150р
+        \nСначала нужно узнать среднее значение лошадиных сил, затем, опираясь на это знания выбрать налоговую ставку. Вбив правильные значения в калькулятор вы получите ответ.
+
+        """)
+        
+        option1 = st.number_input("Введите количество лошадиных сил: ")
+        option2 = st.number_input("Введите налоговую ставку",min_value = 0,max_value=150)
+        
+        answer = option1*option2
+        
+        answers = (question_1_wrong_2 or question_1_wrong_3 or question_1_wrong_4 or question_2_wrong_1 or question_2_wrong_2 or question_2_wrong_4 or 
+        question_3_wrong_3 or question_3_wrong_4 or question_3_wrong_1)
+        
         if st.form_submit_button('Закончить тест и посмотреть результаты'):
-        # if (question_1_right_2 and question_2_right_2 and question_4_right_2 and question_5_right_3)==True and answers == False:
-            # st.markdown('''<h3 style='text-align: left; color: green;'
-            # >Тест сдан! Теперь преступайте к выполнению второй части лабортаной работы.</h3>''', 
-            # unsafe_allow_html=True) 
-        # else:
-            # st.markdown('''<h3 style='text-align: left; color: red;'
-            # >Тест не сдан! Где-то была допущена ошибка.</h3>''', 
-            # unsafe_allow_html=True)
-            st.write('test')
+        
+            if (question_1_right_1 and question_2_right_3  and question_3_right_2 )==True and answers == False and answer == 9748.55:
+                st.markdown('''<h3 style='text-align: left; color: green;'
+                >Тест сдан! Теперь преступайте к выполнению второй части лабортаной работы.</h3>''', 
+                unsafe_allow_html=True) 
+            else:
+                st.markdown('''<h3 style='text-align: left; color: red;'
+                >Тест не сдан! Где-то была допущена ошибка.</h3>''', 
+                unsafe_allow_html=True)
+                
